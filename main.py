@@ -1,8 +1,9 @@
-import os
 from flask import Flask, request, send_file
+from flask_cors import CORS
 import io
 
 app = Flask(__name__)
+CORS(app)  # ← すべてのドメインからのアクセスを許可（Netlify対応）
 
 @app.route("/ust", methods=["POST"])
 def convert_to_shiftjis():
@@ -16,5 +17,4 @@ def convert_to_shiftjis():
     )
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000)) 
-    app.run(debug=True, host="0.0.0.0", port=port)
+    app.run(debug=True, host="0.0.0.0")
